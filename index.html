@@ -4,36 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Фабрика кофе</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image" href="images/favicon.ico"> <!-- иконка на странице -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;700&display=swap" rel="stylesheet">
-
+   
 </head>
 
 <body>
-    <div class="s1">
+    <div class="s1" id="top">
 
         <div class="top-menu">
             <a class="navbar-logo" href="#">
                 <img src="images/5cf3f25d9af39947b09e0a78_logo-light.png" width="141" alt="">
             </a>
-            <nav class="menu-main">
-                <a href="#">Главная</a>
-                <a href="#">О кафе</a>
-                <a href="#">Блог</a>
-                <a href="#">Магазин</a>
-                <a href="#">Контакты</a>
+            <div class="header_burder">
+                <span></span>
+            </div>
+            <nav class="menu-main" id="menu">
+                <a href="#top" class="menu-link">Главная</a>
+                <a href="#about" class="menu-link">О кафе</a>
+                <a href="#blog" class="menu-link">Блог</a>
+                <a href="#shop" class="menu-link">Магазин</a>
+                <a href="#footer" class="menu-link">Контакты</a>
+                
             </nav>
         </div>
 
         <!-- -->
 
         <div class="all">
-            <input checked type="radio" name="respond" id="desktop">
+            
 
             <div class="w-slide">
                 <div class="s1_slid_mask">
-                    <div class="s1_slid_bg" data-ix="slider"></div>
+                    <div class="slider" data-width="720px" data-height="480px">
+                        <div class="slider-item hidden-slide">
+                            <img src="images/image-1.jpg" alt="">
+                        </div>
+                        <div class="slider-item hidden-slide">
+                             <img src="images/image-2.jpg" alt="">
+                        </div>
+                        <div class="slider-item hidden-slide">
+                            <img src="images/image-3.jpg" alt="">
+                        </div>
+                    </div>
                     <div class="s1_box">
                         <div class="s1_content">
                             <img src="images/5cf3f25b3b29a2b19420fdd9_h1-slider-img-1.png" alt="" class="s1_image">
@@ -56,16 +70,16 @@
 
             </div>
             <div class="slider-nav">
-                <a href="#" class="circle"></a>
-                <a href="#" class="circle circle-active"></a>
-                <a href="#" class="circle"></a>
+                <a href="#" class="circle" data-n="0"></a>
+                <a href="#" class="circle " data-n="1"></a>
+                <a href="#" class="circle" data-n="2"></a>
             </div>
 
         </div>
 
     </div>
 
-    <div class="s2">
+    <div class="s2" id="about">
         <div class="blok-5">
             <div class="razdel">
                 <h2 class="razdel-title">Наше сладкое предложение</h2>
@@ -109,7 +123,7 @@
 
     </div>
 
-    <div class="s3">
+    <div class="s3" id="blog">
         <div class="div-blok5">
             <h2 class="h2">блог кафе</h2><img src="images/5cf3f25e4200816f154a41a6_title-separator.png" alt="" class="image">
             <p class="paragraph-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla.</p>
@@ -138,29 +152,37 @@
     </div>
     <div class="s5">
         <div class="s5-blok1">
-            <div class="blok-6 s5-blok-6">
-                <div class="text-block-5">250</div>
-                <h3 class="h3-card-title">ВАРИАЦИИ</h3>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
+            <div class="columis">
+                <div class="blok-6 s5-blok-6">
+                    <div class="text-block-5">250</div>
+                    <h3 class="h3-card-title">ВАРИАЦИИ</h3>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
+                </div>
             </div>
-            <div class="blok-6 s5-blok-6">
-                <div class="text-block-5">25</div>
-                <h3 class="h3-card-title">СТРАН</h3>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
+            <div class="columis">
+                <div class="blok-6 s5-blok-6">
+                    <div class="text-block-5">25</div>
+                    <h3 class="h3-card-title">СТРАН</h3>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
+                </div>
             </div>
-            <div class="blok-6 s5-blok-6">
-                <div class="text-block-5 ">321</div>
-                <h3 class="h3-card-title">КОФЕЙНЯ</h3>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
+            <div class="columis">
+                <div class="blok-6 s5-blok-6">
+                    <div class="text-block-5 ">321</div>
+                    <h3 class="h3-card-title">КОФЕЙНЯ</h3>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
+                </div>
             </div>
-            <div class="blok-6 s5-blok-6">
-                <div class="text-block-5">35</div>
-                <h3 class="h3-card-title">СОРТОВ КОФЕ</h3>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
+            <div class="columis">
+                <div class="blok-6 s5-blok-6">
+                    <div class="text-block-5">35</div>
+                    <h3 class="h3-card-title">СОРТОВ КОФЕ</h3>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="s6">
+    <div class="s6" id="shop">
         <div class="div-blok5">
             <h2 class="h2">магазин</h2><img src="images/5cf3f25e4200816f154a41a6_title-separator.png" alt="" class="image">
             <p class="paragraph-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla.</p>
@@ -264,7 +286,7 @@
             <div class="s8-image _s8_6"></div>
         </div>
     </div>
-    <div class="s9">
+    <div class="s9" id="footer">
         <div class="s9-blok">
             <img src="images/5cf3f25d9af39947b09e0a78_logo-light.png" alt="" class="image-2">
             <p class="s9-p">Мы готовим кофе больше чем в 30 вариантах, включая самые экзотические сорта.
@@ -286,6 +308,7 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
 </body>

@@ -20,12 +20,73 @@ a {
     margin-bottom: 10px;
 }
 
+
+
 .s1 {
     position: relative;
     width: 100%;
     height: 100vh;
     margin-top: -27px;
+    @media (max-width: 767px) {
+        height: 680px;
+    }
+}
+.header_burder{
+    display: none;
+    @media (max-width: 991px) {
+        
+        display: block;
+        position: relative;
+        width: 30px;
+        height: 20px;
+        position: relative;
+        z-index: 15000;  
 
+    }
+}
+
+
+@media (max-width: 991px) {
+.header_burder span{
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    height: 2px;
+    left: 0;
+    top: 9px;
+    transition: all 0.3s ease 0s;
+}
+.header_burder:before, 
+.header_burder:after {
+    content: '';
+    background-color: #fff;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    left: 0;
+    transition: all 0.3s ease 0s;
+}
+
+.header_burder:before{
+    top: 0;
+}
+.header_burder:after{
+    bottom: 0;
+}
+.header_burder.active span{
+    transform: scale(0);
+}
+.header_burder.active:before{
+    transform: rotate(45deg);
+    top: 9px;
+}
+.header_burder.active:after{
+    transform: rotate(-45deg);
+    bottom: 9px;
+}
+.header_burder:hover{
+    cursor: pointer;
+}
 }
 
 
@@ -37,17 +98,40 @@ a {
     top: 20px;
     right: 0%;
     bottom: auto;
-    z-index: 1;
+    z-index: 15000;
     background-color: transparent;
     width: 100vw;
     height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 991px) {
+        padding-right: 46px;
+    }
 }
 
 .menu-main {
     list-style: none;
+    @media (max-width: 991px) {
+        position: absolute; 
+        display:flex;
+        flex-direction: column;
+        left: 0;
+        top: 88px;
+        width: 100%;
+        height: 300px;
+        overflow: auto;
+        background-color: #111111;
+        padding: 44px 10px 20px 10px;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition:  all 0.3s ease 0s;
+        
+        &.active {
+           
+            transform: scaleY(1);
+        }
+    }
 }
 
 .menu-main a {
@@ -56,80 +140,139 @@ a {
     margin-right: 30px;
     letter-spacing: 1px;
     color: #faf6f6;
-    transition: .3s linear;
+    transition: color 500ms ease;
+    @media (max-width: 991px) {
+        padding: 7px 10px; 
+    }
+
 }
 
 .menu-main a:hover {
-    color: #f7b70a;
+    
+    color: #d2b48c;
     opacity: 1;
+    
+}
+.navbar-logo{
+    @media (max-width: 467px) {
+       opacity: 0; 
+    }
 }
 
 /***************************************** МЕНЮ*/
-@media (max-width: 660px) {
-    .menu-main {
-        float: none;
-        padding-top: 20px;
-    }
 
-    .top-menu {
-        text-align: center;
-        padding: 20px 0 0 0;
-    }
-
-    .menu-main a {
-        padding: 0 10px;
-    }
-
-    .menu-main a:before {
-        transform: rotate(45deg) translateX(-6px);
-    }
-}
-
-@media (max-width: 600px) {
-    .menu-main li {
-        display: block;
-    }
-}
 
 .all {
     width: 100%;
     height: 100%;
 }
 
-.slaider {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    z-index: -1;
-    background-size: cover;
-    background-image: url(images/image-1.jpg);
-    transition: opacity 0.2s ease-out;
-}
-
-.slaider:hover {
-    opacity: 0.6;
-}
 
 /********************************************* слайдер*/
-#slider {
+
+.slider {
+    height: 100%;
     position: relative;
-    text-align: center;
-    top: 10px;
-    margin: 0 auto;
+   
+    overflow: hidden;
+    &-item {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        transform: scale(1);
+        opacity: 1;
+        
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+    }
+
 }
+
+  .hidden-slide {
+    visibility: hidden;
+  }
+  
+  @keyframes backOutDown {
+    0% {
+      transform: scale(1);
+    }
+  
+   70% {
+      transform: scale(1.5);
+      opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity:0;
+      }
+    
+  
+  }
+  
+  @keyframes backOpacity {
+    0% {
+      opacity: 1;
+    }
+  
+    100% {
+        opacity: 0;
+    }
+  
+  }
+
+.item1 {
+   &-scale {
+    animation-name: backOutDown;
+    animation-timing-function:linear ;
+    animation-duration: 6000ms;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+  }
+  &-opacity{
+    animation-name: backOpacity;
+    animation-duration: 3000ms;
+  }
+}
+.item {
+    transform: scale(1);
+    opacity: 1;
+    transition: all 10000ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s;
+    &-scale {
+        transform: scale(1.5);  
+        
+   }
+   &-opacity{
+    opacity: 0; 
+    
+   }
+ }
+
+
+
+
 
 .panel {
     position: absolute;
     width: 80px;
     top: 0;
     bottom: 0;
-
+    z-index:10000;
     margin: auto;
     cursor: pointer;
     overflow: hidden;
     color: white;
     font-size: 40px;
     user-select: none;
+    @media (max-width: 767px) {
+        display: none;
+    }
 }
 
 .left {
@@ -142,7 +285,7 @@ a {
 
 .slider-nav {
     position: absolute;
-    z-index: 2;
+    z-index: 20000;
     top: auto;
     right: 0;
     bottom: 0;
@@ -152,7 +295,7 @@ a {
 }
 
 .switch2 {
-    background: url('images/prev.png') no-repeat;
+    background: url('../images/prev.png') no-repeat;
     /*заливка фона картинкой без повторений*/
     margin: auto;
     margin-top: 50vh;
@@ -162,7 +305,7 @@ a {
 }
 
 .switch3 {
-    background: url('images/next.png') no-repeat;
+    background: url('../images/next.png') no-repeat;
     /*заливка фона картинкой без повторений*/
     margin: auto;
     margin-top: 50vh;
@@ -175,7 +318,7 @@ a {
     width: 30px;
     height: 30px;
     display: inline-block;
-    background-color: #f56868;
+    background-color: #797676;
     border-radius: 50%;
     margin: 5px;
 }
@@ -206,7 +349,7 @@ a {
 
 .s1_slid_bg {
     height: 100%;
-    background-image: url(images/5cf3f25e6e00f508c139241f_blog-1-img-1.jpg);
+    background-image: url(../images/5cf3f25e6e00f508c139241f_blog-1-img-1.jpg);
     background-color: aqua;
     background-position: 50% 50%;
     background-size: cover;
@@ -219,12 +362,23 @@ a {
     top: 0px;
     right: 80px;
     text-align: center;
+    z-index: 10000;
+    @media (max-width: 991px) {
+        left: 25%;
+    }
+    @media (max-width:467px) {
+        width: 80%;
+        left: 10%;
+    }
 }
 
 .s1_content {
     margin-top: 39%;
     color: #f5ffff;
     text-align: center;
+    @media (max-width: 991px) {
+        margin-top: 15vh;
+    }
 }
 
 .heading-2 {
@@ -234,8 +388,6 @@ a {
     font-size: 6vw;
     line-height: 1.2em;
 }
-
-.sep_white {}
 
 .paragraph {
     margin-left: auto;
@@ -276,143 +428,6 @@ a {
     border-color: tan;
     background-color: tan;
 }
-}
-
-
-
-#slides article {
-    /*все изображения справа друг от доруга*/
-    width: 20%;
-    float: left;
-}
-
-#slides .image {
-    /*устанавливает общий размер блока с изображениями*/
-    width: 500%;
-    line-height: 0;
-}
-
-#overflow {
-    /*сркывает все, что находится за пределами этого блока*/
-    width: 100%;
-    overflow: hidden;
-}
-
-article img {
-    /*размер изображений слайдера*/
-    width: 100%;
-}
-
-#desktop:checked ~ #slider {
-    /*размер всего слайдера*/
-    max-width: 960px;
-    /*максимальнная длинна*/
-}
-
-/*настройка переключения и положения для левой стрелки*/
-/*если свич1-5 активны, то идет обращение к лейблу из блока с id контроля*/
-#switch1:checked ~ #controls label:nth-child(3),
-#switch2:checked ~ #controls label:nth-child(1),
-#switch3:checked ~ #controls label:nth-child(2) {
-    background: url('images/prev.png') no-repeat;
-    /*заливка фона картинкой без повторений*/
-    float: left;
-    margin: 0 0 0 -84px;
-    /*сдвиг влево*/
-    display: block;
-    height: 68px;
-    width: 68px;
-}
-
-/*настройка переключения и положения для правой стрелки*/
-#switch1:checked ~ #controls label:nth-child(2),
-#switch2:checked ~ #controls label:nth-child(3),
-#switch3:checked ~ #controls label:nth-child(1) {
-    background: url('images/next.png') no-repeat;
-    /*заливка фона картинкой без повторений*/
-    margin: auto;
-    /*сдвиг вправо*/
-    display: block;
-    height: 68px;
-    width: 68px;
-}
-
-label,
-a {
-    /*при наведении на стрелки или переключатели - курсор изменится*/
-    cursor: pointer;
-}
-
-.all input {
-    /*скрывает стандартные инпуты (чекбоксы) на странице*/
-    display: none;
-}
-
-/*позиция изображения при активации переключателя*/
-#switch1:checked ~ #slides .image {
-    margin-left: 0;
-}
-
-#switch2:checked ~ #slides .image {
-    margin-left: -100%;
-}
-
-#switch3:checked ~ #slides .image {
-    margin-left: -200%;
-}
-
-#controls {
-    /*положение блока всех управляющих элементов*/
-    margin: -25% 0 0 0;
-    width: 100%;
-    height: 50px;
-}
-
-.slider-nav label {
-    /*стиль отдельного переключателя*/
-    border-radius: 10px;
-    /*скругление углов*/
-    display: inline-block;
-    /*расположение в строку*/
-    width: 15px;
-    height: 15px;
-    background: #bbb;
-}
-
-
-
-#label:hover {
-    /*поведение чекбокса при наведении*/
-    background: #76c8ff;
-    border-color: #777 !important;
-    /*выполнение в любом случае*/
-}
-
-/*цвет активного лейбла при активации чекбокса*/
-#switch1:checked ~ #active label:nth-child(1),
-#switch2:checked ~ #active label:nth-child(2),
-#switch3:checked ~ #active label:nth-child(3) {
-    background: #18a3dd;
-    border-color: #18a3dd !important;
-}
-
-#slides .image {
-    /*анимация пролистывания изображений*/
-    transition: all 800ms cubic-bezier(0.770, 0.000, 0.175, 1.000);
-}
-
-#controls label:hover {
-    /*прозрачность стрелок при наведении*/
-    opacity: 0.6;
-}
-
-#controls label {
-    /*прозрачность стрелок при отводе курсора*/
-    transition: opacity 0.2s ease-out;
-}
-
-/**************************************************** слайдер*/
-
 
 /**************************************** 2-я секция*/
 .s2 {
@@ -422,7 +437,7 @@ a {
 }
 
 .blok-5 {
-    width: auto;
+   
     max-width: 1330px;
     margin: 0 auto 0 auto;
 }
@@ -437,6 +452,12 @@ a {
     font-weight: 400;
     text-transform: uppercase;
     margin-bottom: 25px;
+    @media (max-width: 991px) {
+        font-size: 5vw;
+    }
+    @media (max-width: 767px) {
+    font-size: 8vw;
+    }
 }
 
 .razdel-image {
@@ -445,27 +466,40 @@ a {
 }
 
 .razdel-text {
-    width: 600px;
+    width: 60%;
     font-size: 16px;
     margin: 0 auto 10px auto;
 }
 
 .collums {
-    width: auto;
+    max-width: 100%;
     margin: 100px auto 10px auto;
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+    flex-wrap: wrap;
 }
 
 .columis {
     padding: 0 10px 0 10px;
-    height: 25vh;
+    width: 235px;
+    @media (max-width: 991px) {
+       width: 50%;
+    }
+    @media (max-width: 479px) {
+        width:100%;
+    }
+align-items: flex-end;
+justify-content:flex-start;
+flex-direction: column-reverse
 }
 
 .blok-6 {
     display: grid;
-    grid-template-rows: 100px 80px 80px;
+    width: 100%;
+    grid-template-rows: 96px 1fr 1fr;
     /* 3 строки */
+    
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -532,7 +566,7 @@ a {
     margin-top: 0px;
     padding-top: 10vh;
     padding-bottom: 10vw;
-    background-image: url(images/5cf3f2606e00f53a25392430_h1-bacground-img-1.jpg);
+    background-image: url(../images/5cf3f2606e00f53a25392430_h1-bacground-img-1.jpg);
     background-position: 0px 0px;
     background-size: cover;
     background-attachment: fixed;
@@ -556,6 +590,12 @@ a {
     text-align: center;
     letter-spacing: 1px;
     text-transform: uppercase;
+    @media (max-width: 991px) {
+        font-size: 5vw;
+    }
+    @media (max-width: 767px) {
+    font-size: 8vw;
+    }
 }
 
 .paragraph-2 {
@@ -576,18 +616,26 @@ a {
     /* 3 столбца */
     width: 100%;
     margin-top: 100px;
-
+    @media (max-width: 767px) {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 50px;
+    }
 }
 
 .div-blok6-1 {
     width: 100%;
     padding: 0 10px;
+    @media (max-width: 767px) {
+        
+        margin-top: 20px;
+    }
 }
 
 .post-bg {
     width: 100%;
     height: 35vh;
-    background-image: url(images/5cf3f25e6e00f508c139241f_blog-1-img-1.jpg);
+    background-image: url(../images/5cf3f25e6e00f508c139241f_blog-1-img-1.jpg);
     background-position: 50% 50%;
     background-size: cover;
     background-repeat: repeat;
@@ -597,11 +645,11 @@ a {
 }
 
 ._bg1 {
-    background-image: url(images/5cf3f25f6e00f576a8392420_blog-1-img-2.jpg);
+    background-image: url(../images/5cf3f25f6e00f576a8392420_blog-1-img-2.jpg);
 }
 
 ._bg2 {
-    background-image: url(images/5cf3f25f73a6235456b41b39_blog-1-img-3.jpg);
+    background-image: url(../images/5cf3f25f73a6235456b41b39_blog-1-img-3.jpg);
 }
 
 .s3_h3 {
@@ -652,7 +700,7 @@ a {
     padding-bottom: 10vh;
     justify-content: center;
     align-items: center;
-    background-image: url(images/5cf3f26073a62322fab41b3a_h1-bacground-img-2.jpg);
+    background-image: url(../images/5cf3f26073a62322fab41b3a_h1-bacground-img-2.jpg);
     background-position: 50% 50%;
     background-size: cover;
     background-attachment: fixed;
@@ -672,10 +720,9 @@ a {
 }
 
 .s5-blok1 {
-    display: grid;
-    /* 3 строкиgrid-template-rows: ; */
-    grid-template-columns: 25% 25% 25% 25%;
-    /* 3 столбца */
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
     width: 100%;
     margin-top: 50px;
 }
@@ -721,7 +768,7 @@ a {
 .s6 {
     padding-top: 10vh;
     padding-bottom: 10vh;
-    background-image: url(images/5cf3f2606e00f53a25392430_h1-bacground-img-1.jpg);
+    background-image: url(../images/5cf3f2606e00f53a25392430_h1-bacground-img-1.jpg);
     background-position: 100% 100%;
     background-size: cover;
     background-attachment: fixed; /* замораживает фоновую картинку*/
@@ -730,6 +777,17 @@ a {
 
 .s6-box1 {
     text-align: center;
+    flex: 0 25%;
+    @media (max-width: 991px) {
+        flex-basis: 40%;
+    }
+    @media (max-width:767px) {
+        flex-basis: 50%;
+    }
+    @media (max-width: 479px) {
+        flex-basis: 100%;
+    }
+   
 }
 
 .s6-box1-1 {
@@ -741,19 +799,19 @@ a {
 }
 
 .s6-box1-1._1 {
-    background-image: url(images/5cf3f25d73a6233db8b41b35_product-img-1-800x800.png);
+    background-image: url(../images/5cf3f25d73a6233db8b41b35_product-img-1-800x800.png);
 }
 
 .s6-box1-1._2 {
-    background-image: url(images/5cf3f25d6e00f539e939240e_product-img-5-800x800.png);
+    background-image: url(../images/5cf3f25d6e00f539e939240e_product-img-5-800x800.png);
 }
 
 .s6-box1-1._3 {
-    background-image: url(images/5cf3f25dee1b5254dd99bde3_product-img-3-800x800.png);
+    background-image: url(../images/5cf3f25dee1b5254dd99bde3_product-img-3-800x800.png);
 }
 
 .s6-box1-1._4 {
-    background-image: url(images/5cf3f25e3b29a2632520fddb_product-img-8-800x800.png);
+    background-image: url(../images/5cf3f25e3b29a2632520fddb_product-img-8-800x800.png);
 }
 
 .s6-box1-text {
@@ -819,35 +877,35 @@ a {
 }
 
 .s7-box._1 {
-    background-image: url(images/5cf3f25a9af39974779e0a76_port-1-img-8.jpg);
+    background-image: url(../images/5cf3f25a9af39974779e0a76_port-1-img-8.jpg);
 }
 
 .s7-box._2 {
-    background-image: url(images/5cf3f25a3b29a22a0f20fdd4_port-1-img-7.jpg);
+    background-image: url(../images/5cf3f25a3b29a22a0f20fdd4_port-1-img-7.jpg);
 }
 
 .s7-box._3 {
-    background-image: url(images/5cf3f25aee1b52262199bddd_port-1-img-6.jpg);
+    background-image: url(../images/5cf3f25aee1b52262199bddd_port-1-img-6.jpg);
 }
 
 .s7-box._4 {
-    background-image: url(images/5cf3f2599af3998dd49e0a74_port-1-img-3.jpg);
+    background-image: url(../images/5cf3f2599af3998dd49e0a74_port-1-img-3.jpg);
 }
 
 .s7-box._5 {
-    background-image: url(images/5cf3f25a9af3990d079e0a75_port-1-img-5.jpg);
+    background-image: url(../images/5cf3f25a9af3990d079e0a75_port-1-img-5.jpg);
 }
 
 .s7-box._6 {
-    background-image: url(images/5cf3f25942008118ca4a41a0_port-1-img-2.jpg);
+    background-image: url(../images/5cf3f25942008118ca4a41a0_port-1-img-2.jpg);
 }
 
 .s7-box._7 {
-    background-image: url(images/5cf3f2596e00f57a7b3923c6_port-1-img-1.jpg);
+    background-image: url(../images/5cf3f2596e00f57a7b3923c6_port-1-img-1.jpg);
 }
 
 .s7-box._8 {
-    background-image: url(images/5cf3f25973a6230129b41b2c_port-1-img-4.jpg);
+    background-image: url(../images/5cf3f25973a6230129b41b2c_port-1-img-4.jpg);
 }
 
 .s7-box_link {
@@ -878,6 +936,12 @@ img {
 .s8 {
     padding-top: 5vh;
     padding-bottom: 5vh;
+    @media (max-width: 991px) {    
+        height: 30vh;
+    }
+    @media (max-width: 767px) {    
+        height: 40vh;
+    }
 }
 .s8-blok1{
     display: flex;
@@ -894,20 +958,25 @@ img {
     background-size: contain;
     background-repeat: no-repeat;
     flex: 0 16.666666666666668%;
-  
+    @media (max-width: 991px) {
+        flex-basis: 30%;
+    }
+    @media (max-width: 767px) {
+        flex-basis: 35%;
+    }
 }
-.s8-image._s8_1{ background-image: url(images/5cf3f25a3b29a21dd220fdd7_clients-img-2-hover.png)}
-.s8-image._s8_2{ background-image: url(images/5cf3f25b3b29a2600e20fdd8_clients-img-5-hover.png)}
-.s8-image._s8_3{ background-image: url(images/5cf3f25a4200810af64a41a1_clients-img-4-hover.png)}
-.s8-image._s8_4{ background-image: url(images/5cf3f25a9af39943a49e0a77_clients-img-3-hover.png)}
-.s8-image._s8_5{ background-image: url(images/5cf3f25a3b29a21dd220fdd7_clients-img-2-hover.png)}
-.s8-image._s8_6{ background-image: url(images/5cf3f25a3b29a2a0bb20fdd5_clients-img-1.png)}
+.s8-image._s8_1{ background-image: url(../images/5cf3f25a3b29a21dd220fdd7_clients-img-2-hover.png)}
+.s8-image._s8_2{ background-image: url(../images/5cf3f25b3b29a2600e20fdd8_clients-img-5-hover.png)}
+.s8-image._s8_3{ background-image: url(../images/5cf3f25a4200810af64a41a1_clients-img-4-hover.png)}
+.s8-image._s8_4{ background-image: url(../images/5cf3f25a9af39943a49e0a77_clients-img-3-hover.png)}
+.s8-image._s8_5{ background-image: url(../images/5cf3f25a3b29a21dd220fdd7_clients-img-2-hover.png)}
+.s8-image._s8_6{ background-image: url(../images/5cf3f25a3b29a2a0bb20fdd5_clients-img-1.png)}
 /************************************** 8-я секция* конец*/
 /************************************** 9-я секция* начало*/
 .s9 {
     padding-top: 10vh;
     padding-bottom: 10vh;
-    background-image: url(images/5cf3f25f4200818ad34a41a8_footer-top-img-1.jpg);
+    background-image: url(../images/5cf3f25f4200818ad34a41a8_footer-top-img-1.jpg);
     background-position: 50% 50%;
     background-size: cover;
     background-repeat: no-repeat;
