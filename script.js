@@ -141,7 +141,6 @@ let images = {
 	 * hidden-slide. */
 	showImageWithCurrentIdx(e) {
 		this.slides[e].classList.remove('hidden-slide');
-		
 	},
 	// 
 	showImageWithCurrentIdxScale(e) {
@@ -149,9 +148,6 @@ let images = {
 		this.slides[images.currentIdx.q].style.transition = "transform 10000ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s";
 		this.slides[images.currentIdx.q].style.zIndex = this.currentIdx.z
 		this.slides[images.currentIdx.q].style.visibility
-		
-		console.log('увеличение тело')
-
 	},
 
 	/** Видимому (текущему) слайду добавляем класс hidden-slide. */
@@ -160,7 +156,6 @@ let images = {
 		this.slidesImg[this.currentIdx.r].style.transition = "";
 		this.slidesImg[this.currentIdx.r].style.opacity = 1;
 		this.slides[images.currentIdx.r].style.transform = 'scale(1)';
-		
 	},
 
     imageOpacity(e) {
@@ -175,10 +170,12 @@ let images = {
 	imageOpacityRemove(e) {
 		this.slides[e].classList.Remove('item-opacity');
 	},
-    //  подсвечиваем первый кружок
+    
+	//  подсвечиваем первый кружок
 	slideNavActive(e) {
 		this.slidesNav[e].classList.add("circle-active");
 	},
+	
 	slideNavActiveRemove(e) {
 		this.slidesNav[e].classList.remove("circle-active");
 	},
@@ -193,6 +190,7 @@ let images = {
 		this.setNextRightImage()
 		this.animate()
 	},
+	
 	/** Переключиться на предыдущее изображение. */
 	setNextLeftImage() {
 		this.currentIdx.r = this.currentIdx.q
@@ -203,7 +201,7 @@ let images = {
 			this.currentIdx.q--;
 		}
 		
-		console.log(this.currentIdx.q, this.currentIdx.r )
+	//	console.log(this.currentIdx.q, this.currentIdx.r )
 	},
 
 	/** Переключиться на следующее изображение. */
@@ -214,7 +212,7 @@ let images = {
 		} else {
 			this.currentIdx.q++;
 		}
-		console.log(this.currentIdx.q, this.currentIdx.r )
+		//console.log(this.currentIdx.q, this.currentIdx.r )
 	},
 
 	/** Переключиться на изображение. */
@@ -223,7 +221,7 @@ let images = {
 		this.currentIdx.r = this.currentIdx.q
 		this.currentIdx.q = Number(e.target.dataset.n)
 		
-		console.log(this.currentIdx.q, this.currentIdx.r )
+		//console.log(this.currentIdx.q, this.currentIdx.r )
 		this.animate()//
 	},
 
