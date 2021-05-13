@@ -54,9 +54,10 @@ window.addEventListener('scroll', function () {
 		ter1[3].classList.remove('_44');
 	};
 
-	if ((((scrollY>2398) && (scrollY<3220)) && (window.innerWidth>991)) ||
-		(((scrollY>2640) && (scrollY<4140)) && (window.innerWidth<991) && (window.innerWidth>479)) ||
-		(((scrollY>4000) && (scrollY<5480)) && (window.innerWidth<479)) 
+	if ((((scrollY > 2398) && (scrollY<3220)) && (window.innerWidth>991)) ||
+		(((scrollY > 2640) && (scrollY<4140)) && (window.innerWidth<991) && (window.innerWidth>767)) ||
+		(((scrollY > 3475) && (scrollY < 4575))  && (window.innerWidth < 767) && (window.innerWidth > 479)) ||
+		(((scrollY > 4000) && (scrollY<5480)) && (window.innerWidth<479)) 
 	) {
 		let ter1 = document.getElementsByClassName('text-block-5');
 		ter1[0].classList.add('tb5_1');
@@ -65,9 +66,10 @@ window.addEventListener('scroll', function () {
 		ter1[3].classList.add('tb5_4');
 	};
 
-	if ((((scrollY>3400) || (scrollY<2188))  && (window.innerWidth>991)) ||
-		(((scrollY>4140) || (scrollY<2640))  && (window.innerWidth<991) && (window.innerWidth>479)) ||
-		(((scrollY>6000) || (scrollY<4000)) && (window.innerWidth<479))
+	if ((((scrollY > 3400) || (scrollY < 2188))  && (window.innerWidth > 991)) ||
+		(((scrollY > 4140) || (scrollY < 2640))  && (window.innerWidth < 991) && (window.innerWidth > 767)) ||
+		(((scrollY > 4675) || (scrollY < 3175))  && ((window.innerWidth < 767) && (window.innerWidth > 479))) ||
+		(((scrollY > 6000) || (scrollY < 4000)) && (window.innerWidth < 479))
 	) {
 		let ter1 = document.getElementsByClassName('text-block-5');
 		ter1[0].classList.remove('tb5_1');
@@ -75,22 +77,23 @@ window.addEventListener('scroll', function () {
 		ter1[2].classList.remove('tb5_3');
 		ter1[3].classList.remove('tb5_4');
 	};
+
 	if (((scrollY>4524) && (window.innerWidth>991)) || 
 		((scrollY>5057) && ((window.innerWidth<991) && (window.innerWidth>767))) || 
-		((scrollY>5057) && ((window.innerWidth<767)))
-	
+		((scrollY>6057) && ((window.innerWidth<767)&& (window.innerWidth>479))) || 
+		((scrollY>7500) && ((window.innerWidth<479)))
 	) {
 		let ter1 = document.getElementsByClassName('image-2');
 		ter1[0].classList.add('s9_i_1');
-		
 	};
+
 	if (((scrollY<4399) && (window.innerWidth>991)) ||
 		((scrollY<5157) && ((window.innerWidth<991) && (window.innerWidth>767))) ||
-		((scrollY<5226) && ((window.innerWidth<767)))
+		((scrollY<6149) && ((window.innerWidth<767) && (window.innerWidth>479))) || 
+		((scrollY<7600) && ((window.innerWidth<479)))
 	) {
 		let ter1 = document.getElementsByClassName('image-2');
 		ter1[0].classList.remove('s9_i_1');
-		
 	};
 });
 
@@ -115,20 +118,23 @@ function createSlaider (e) { // отрисовка слайдера
   // Объект слайдера
 let images = {
 	/* {int} Номер текущего изображения */
-	currentIdx: {q:0, z:1},
+	currentIdx: {q:0, r:2, z:1},
 
 	/* {HTMLDivElement[]} slides элементы слайдов */
 	slides: [],
-
+	slidesImg: [],
 	slidesNav: [],
 	
 	/** Получаем все слайды и показываем первый слайд. */
 	init() {
 		this.slides = document.querySelectorAll('.slider-item');
+		this.slidesImg = document.querySelectorAll('.slider-img');
 		this.slidesNav = document.querySelectorAll('.circle');
 		
 		this.showImageWithCurrentIdx(this.currentIdx.q);
 		this.slideNavActive(this.currentIdx.q)
+		this.slidesImg[this.currentIdx.q].style.opacity = 1;
+		this.showImageWithCurrentIdxScale()
 	},
 
 	/** Берем слайд с текущим индексом и убираем у него класс
@@ -137,23 +143,39 @@ let images = {
 		this.slides[e].classList.remove('hidden-slide');
 		
 	},
+	// 
 	showImageWithCurrentIdxScale(e) {
-		this.slides[e].classList.add('item-scale');
+		this.slides[images.currentIdx.q].style.transform = 'scale(1.5)'; 
+		this.slides[images.currentIdx.q].style.transition = "transform 10000ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s";
+		this.slides[images.currentIdx.q].style.zIndex = this.currentIdx.z
+		this.slides[images.currentIdx.q].style.visibility
+		
+		console.log('увеличение тело')
+
 	},
 
 	/** Видимому (текущему) слайду добавляем класс hidden-slide. */
-	hideVisibleImage(e) {
-		this.slides[e].classList.add("hidden-slide");
-		//this.slides[e].classList.remove('item-scale');
-
+	hideVisibleImage() {
+		this.slides[this.currentIdx.r].classList.add("hidden-slide");
+		this.slidesImg[this.currentIdx.r].style.transition = "";
+		this.slidesImg[this.currentIdx.r].style.opacity = 1;
+		this.slides[images.currentIdx.r].style.transform = 'scale(1)';
+		
 	},
+
     imageOpacity(e) {
-		this.slides[e].classList.add('item-opacity');
+		this.slidesImg[this.currentIdx.r].style.transition = "opacity 5000ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s";
+		this.slidesImg[this.currentIdx.r].style.opacity = 0;
+				
+		this.showImageWithCurrentIdx(this.currentIdx.q)
+		
+		this.slidesImg[this.currentIdx.q].style.transition = "opacity 5000ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 2s";
+		this.slidesImg[this.currentIdx.q].style.opacity = 1;
 	},
 	imageOpacityRemove(e) {
 		this.slides[e].classList.Remove('item-opacity');
 	},
-
+    //  подсвечиваем первый кружок
 	slideNavActive(e) {
 		this.slidesNav[e].classList.add("circle-active");
 	},
@@ -163,142 +185,89 @@ let images = {
 
 	/** Переключиться на предыдущее изображение. */
 	clickNextLeftImage() {
-		clearInterval(timerId)
 		this.setNextLeftImage()
-		animate()
+		this.animate()
 	},
 
 	clickNextRightImage() {
-		clearInterval(timerId)
 		this.setNextRightImage()
-		animate()
+		this.animate()
 	},
-
+	/** Переключиться на предыдущее изображение. */
 	setNextLeftImage() {
+		this.currentIdx.r = this.currentIdx.q
 		
 		if (this.currentIdx.q == 0) {
 			this.currentIdx.q = this.slides.length - 1;
-			
 		} else {
 			this.currentIdx.q--;
-			
-		}
-		if (this.currentIdx.z == 0) {
-			this.currentIdx.z = this.slides.length - 1;
-			
-		} else {
-			this.currentIdx.z--;
-			
 		}
 		
+		console.log(this.currentIdx.q, this.currentIdx.r )
 	},
 
 	/** Переключиться на следующее изображение. */
 	setNextRightImage() {
-		
+		this.currentIdx.r = this.currentIdx.q
 		if (this.currentIdx.q == this.slides.length - 1) {
 			this.currentIdx.q = 0;
-			
 		} else {
 			this.currentIdx.q++;
-			
 		}
-
-		if (this.currentIdx.z == this.slides.length - 1) {
-			this.currentIdx.z = 0;
-			
-		} else {
-			this.currentIdx.z++;
-			
-		}
+		console.log(this.currentIdx.q, this.currentIdx.r )
 	},
 
 	/** Переключиться на изображение. */
 	setNextImage(e) {
-		//console.log(e.target.dataset.n)
-		clearInterval(timerId)
 		
+		this.currentIdx.r = this.currentIdx.q
+		this.currentIdx.q = Number(e.target.dataset.n)
 		
-		this.currentIdx.q = e.target.dataset.n;
-		if (this.currentIdx.q == this.slides.length - 1) {
-			this.currentIdx.z = 0;
-			
-		} else {
-			this.currentIdx.z = this.currentIdx.q + 1;
-			
-		}
-		
-		animate()
+		console.log(this.currentIdx.q, this.currentIdx.r )
+		this.animate()//
 	},
 
+	animate() {
+		this.slideNavActiveRemove(this.currentIdx.r)
+		this.slideNavActive(this.currentIdx.q)
+		
+		const p =  new Promise((resolve, reject)=>{
+			setTimeout(() => {
+				this.imageOpacity()
+				resolve()
+			},100)
+		})
+		
+		
+		p.then(()=>{
+			return new Promise((resolve, reject)=>{
+				setTimeout(() => {
+					this.hideVisibleImage()
+					
+					this.currentIdx.z++
+					this.slides[images.currentIdx.q].style.zIndex = this.currentIdx.q
+					
+					
+					console.log('пересчет')
+					resolve()
+				},4000)	
+			})
+		}).then(()=>{
+			return new Promise((resolve, reject)=>{
+				setTimeout(() => {
+					this.showImageWithCurrentIdxScale()
+					
+					console.log('увеличение нового слайда')
+					resolve()
+				},100)	
+			})
+		})
+	}
 	 
 }
 
 createSlaider ()
-let z = 1
-function animate() {
-	const p =  new Promise((resolve, reject)=>{
-		setTimeout(() => {
-			images.slides[images.currentIdx.q].style.transform = 'scale(1.5)'; 
-			images.slides[images.currentIdx.q].style.transition = " all 10000ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s";
-			images.slides[images.currentIdx.q].style.zIndex = z
-			//images.slides[images.currentIdx.q].style.visibility
-			//images.showImageWithCurrentIdxScale(images.currentIdx.q)
-			console.log('увеличение')
-			resolve()
-		},100)	
-	})
 
-	p.then(()=>{
-		return new Promise((resolve, reject)=>{
-			setTimeout(() => {
-				images.slides[images.currentIdx.q].style.opacity=0;
-				images.slides[images.currentIdx.z].style.opacity=0;
-				//images.imageOpacity(images.currentIdx.q)
-				console.log('прозрачность')
-				resolve()
-			},3000)	
-		})
-	}).then(()=>{
-		return new Promise((resolve, reject)=>{
-			setTimeout(() => {
-				//images.slides[images.currentIdx.z].style. 
-				images.showImageWithCurrentIdx(images.currentIdx.z) 
-				images.slides[images.currentIdx.z].style.transition = " all 10000ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s";
-				images.slides[images.currentIdx.z].style.opacity=1;
-				
-				
-				images.slideNavActiveRemove(images.currentIdx.q)
-				images.slideNavActive(images.currentIdx.z) 
-				
-				
-				//images.setNextRightImage()
-				console.log('следующий')
-				resolve()
-			},3000)	
-		})
-	}).then(()=>{
-		return new Promise((resolve, reject)=>{
-			setTimeout(() => {
-				//images.showImageWithCurrentIdx(images.currentIdx.z);
-				images.hideVisibleImage(images.currentIdx.q) 
-				images.slides[images.currentIdx.q].style.transform = ''; 
-				images.slides[images.currentIdx.q].style.transition = ""
-				images.slides[images.currentIdx.q].style.opacity=1;
-				images.setNextRightImage()
-				console.log('пересчет следующий')
-				resolve()
-			},4000)	
-		})
-	})
-	z++
-}
-
-animate()
-
-//let timerId = setInterval(() => {
-//console.log(z)
-//	animate()
-	
-		
-//}, 15000);
+let timerId = setInterval(() => {
+	images.clickNextRightImage()
+}, 5000);
