@@ -96,7 +96,7 @@ window.addEventListener('scroll', function () {
 		ter1[0].classList.remove('s9_i_1');
 	};
 });
-
+let date = new Date();
 
 function createSlaider (e) { // отрисовка слайдера
 	
@@ -127,6 +127,7 @@ let images = {
 	
 	/** Получаем все слайды и показываем первый слайд. */
 	init() {
+		console.time("walkIn");
 		this.slides = document.querySelectorAll('.slider-item');
 		this.slidesImg = document.querySelectorAll('.slider-img');
 		this.slidesNav = document.querySelectorAll('.circle');
@@ -146,25 +147,29 @@ let images = {
 	showImageWithCurrentIdxScale(e) {
 		this.slides[images.currentIdx.q].style.transform = 'scale(1.5)'; 
 		this.slides[images.currentIdx.q].style.transition = "transform 10000ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s";
-		this.slides[images.currentIdx.q].style.zIndex = this.currentIdx.z
-		this.slides[images.currentIdx.q].style.visibility
+		let date1 = new Date();
+		console.log('увеличение слайда', date1-date)
 	},
 
 	/** Видимому (текущему) слайду добавляем класс hidden-slide. */
 	hideVisibleImage() {
 		this.slides[this.currentIdx.r].classList.add("hidden-slide");
+		this.slides[this.currentIdx.r].style.transition = "";
+		this.slides[images.currentIdx.r].style.transform = 'scale(1)';
 		this.slidesImg[this.currentIdx.r].style.transition = "";
 		this.slidesImg[this.currentIdx.r].style.opacity = 1;
-		this.slides[images.currentIdx.r].style.transform = 'scale(1)';
+		
 	},
 
     imageOpacity(e) {
+		let date1 = new Date();
+		console.log('opacity    ',date1 - date  )
 		this.slidesImg[this.currentIdx.r].style.transition = "opacity 5000ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s";
 		this.slidesImg[this.currentIdx.r].style.opacity = 0;
 				
 		this.showImageWithCurrentIdx(this.currentIdx.q)
 		
-		this.slidesImg[this.currentIdx.q].style.transition = "opacity 5000ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 2s";
+		this.slidesImg[this.currentIdx.q].style.transition = "opacity 6000ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 3s";
 		this.slidesImg[this.currentIdx.q].style.opacity = 1;
 	},
 	imageOpacityRemove(e) {
@@ -226,6 +231,7 @@ let images = {
 	},
 
 	animate() {
+		//перекрашиваем кружочки
 		this.slideNavActiveRemove(this.currentIdx.r)
 		this.slideNavActive(this.currentIdx.q)
 		
@@ -240,13 +246,13 @@ let images = {
 		p.then(()=>{
 			return new Promise((resolve, reject)=>{
 				setTimeout(() => {
-					this.hideVisibleImage()
 					
 					this.currentIdx.z++
-					this.slides[images.currentIdx.q].style.zIndex = this.currentIdx.q
+					this.slides[images.currentIdx.q].style.zIndex = this.currentIdx.z
 					
+					this.hideVisibleImage()
 					
-					console.log('пересчет')
+					console.log('скрыли пред слайд')
 					resolve()
 				},4000)	
 			})
@@ -255,7 +261,7 @@ let images = {
 				setTimeout(() => {
 					this.showImageWithCurrentIdxScale()
 					
-					console.log('увеличение нового слайда')
+					
 					resolve()
 				},100)	
 			})
@@ -267,5 +273,8 @@ let images = {
 createSlaider ()
 
 let timerId = setInterval(() => {
-	images.clickNextRightImage()
-}, 5000);
+	let date1 = new Date();
+	console.log('имитация клика',date1 - date  )
+	images.setNextRightImage()
+	images.animate()
+}, 8000);
